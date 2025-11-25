@@ -1,0 +1,31 @@
+services:
+  mysqldb:
+    image: mysql:8.0.39
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/init-files:/docker-entrypoint-initdb.d
+    restart: always
+    environment:
+      MYSQL_DATABASE: native_api
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: K0p7IfYlNL3jcT5o
+    ports:
+      - "3307:3306"
+  autossh:
+    image: xubuntu
+    privileged: true
+    volumes:
+      - ${HOME}/.ssh:/root/.ssh
+      - .:/app
+    ports:
+      - "10701:10701"
+      - "10801:10801"
+      - "10802:10802"
+      - "10803:10803"
+      - "10804:10804"
+      - "10805:10805"
+      - "10806:10806"
+      - "10807:10807"
+      - "6374:6374"
+      - "6375:6375"

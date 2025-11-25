@@ -1,0 +1,66 @@
+url: "https://rdinfra-uat-v2.native.org/proxy/ws/1"
+proxy_list:
+  - port: 2022
+    target: "127.0.0.1:22"
+  - port: 3001
+    target: "50.0.1.46:3001"
+  - port: 8997
+    target: "token-info-uat:8999"
+  - port: 8999
+    target: "onchain-monitor-uat:8999"
+  - port: 8996
+    target: "quote-manager-uat:8999"
+  - port: 9006
+    target: "price-monitor-uat:8999"
+  - port: 8998
+    target: "inventory-monitor-uat:8999"
+  - port: 8995
+    target: "risk-manager-uat:8999"
+  - port: 8080
+    target: "native-api-gateway-uat:8999"
+  - port: 8082
+    target: "jup-rfq-uat:8999"
+  - port: 8994
+    target: "pricer-uat:8999"
+  - port: 9000
+    target: 'quote-ticker-task-uat:8999'
+  - port: 9001
+    target: "stock-quote-ticker-task-uat:8999"
+  - port: 8993
+    target: "order-manager-uat:8999"
+  - port: 8984
+    target: "orderbook-manager-uat:8999"
+  - port: 8983
+    target: "order-manager-solana-uat:8999"
+  - port: 8992
+    target: "native-widget-signer-uat:8999"
+  - port: 8991
+    target: "hedge-tool-uat:8999"
+  - port: 8081
+    target: "native-admin-uat:8999"
+  - port: 8987
+    target: "settlement-uat:8999"
+  - port: 8980
+    target: "halo-pricer-library-uat:8980"
+  - port: 8989
+    target: "hedge-rw-db-uat:8999"
+  - port: 8986
+    target: "hedge-signer-uat:8999"
+  - port: 8890
+    target: "native-operation-signer-uat:8999"
+  - port: 8891
+    target: "limit-order-uat:8999"
+  - port: 8892
+    target: "pmm-signer-uat:8999"
+  - port: 8985
+    target: "cex-position-monitor-uat:8999"
+  - port: 8893
+    target: "dex-monitor-uat:8999"
+  - port: 9008
+    target: "stock-monitor-uat:8999"
+  - port: 9004
+    target: "cex-monitor-uat:8999"
+  - port: 9005
+    target: "cex-monitor-spot-uat:8999"
+  - port: 9007
+    target: "native-config-uat:8999"

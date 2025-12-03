@@ -3134,7 +3134,7 @@
               }
             ]
           },
-          "unit": "ms"
+          "unit": "us"
         },
         "overrides": []
       },

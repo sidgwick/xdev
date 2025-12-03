@@ -99,7 +99,7 @@
         "h": 7,
         "w": 6,
         "x": 0,
-        "y": 1
+        "y": 0
       },
       "id": 1,
       "options": {
@@ -124,7 +124,7 @@
           },
           "editorMode": "code",
           "expr": "runtime_cpu_load_1{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}",
-          "legendFormat": "{{native_env}}-{{app}}-{{pod_name}}",
+          "legendFormat": "{{pod_name}}",
           "range": true,
           "refId": "A"
         }

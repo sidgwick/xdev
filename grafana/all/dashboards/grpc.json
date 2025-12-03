@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 12,
+  "id": 0,
   "links": [],
   "panels": [
     {
@@ -125,7 +125,7 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "rate(grpc_client_request{to_env=~\"$to_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[1m])",
+          "expr": "rate(grpc_client_request{from_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[1m])",
           "legendFormat": "{{pod_name}}-{{to_method}}",
           "range": true,
           "refId": "A"
@@ -139,6 +139,7 @@
         "type": "prometheus",
         "uid": "af3yvzwa6ckcgc"
       },
+      "description": "每秒请求数量",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -191,7 +192,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "cps"
         },
         "overrides": []
       },
@@ -223,8 +225,8 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "rate(grpc_server_request{to_env=~\"$to_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[1m])",
-          "legendFormat": "{{pod_name}}",
+          "expr": "rate(grpc_server_request{to_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[1m])",
+          "legendFormat": "{{pod_name}}-{{to_method}}",
           "range": true,
           "refId": "A"
         }
@@ -237,6 +239,7 @@
         "type": "prometheus",
         "uid": "af3yvzwa6ckcgc"
       },
+      "description": "GRPC 客户端延迟",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -289,7 +292,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "ms"
         },
         "overrides": []
       },
@@ -321,7 +325,7 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "rate(grpc_client_latency_sum{to_env=~\"$to_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[1m]) / rate(grpc_client_latency_count{to_env=~\"$to_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[1m])",
+          "expr": "rate(grpc_client_latency_sum{from_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[1m]) / rate(grpc_client_latency_count{from_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[1m])",
           "legendFormat": "{{pod_name}}",
           "range": true,
           "refId": "A"
@@ -335,6 +339,7 @@
         "type": "prometheus",
         "uid": "af3yvzwa6ckcgc"
       },
+      "description": "GRPC 服务端延时",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -387,7 +392,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "ms"
         },
         "overrides": []
       },
@@ -419,7 +425,7 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "rate(grpc_server_latency_sum{to_env=~\"$to_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[1m]) / rate(grpc_server_latency_count{to_env=~\"$to_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[1m])",
+          "expr": "rate(grpc_server_latency_sum{to_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[1m]) / rate(grpc_server_latency_count{to_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[1m])",
           "legendFormat": "{{pod_name}}",
           "range": true,
           "refId": "A"
@@ -437,8 +443,8 @@
       {
         "allowCustomValue": false,
         "current": {
-          "text": "uat",
-          "value": "uat"
+          "text": "staging",
+          "value": "staging"
         },
         "definition": "label_values(runtime_cpu_load_1,native_env)",
         "label": "环境",
@@ -456,8 +462,8 @@
       {
         "allowCustomValue": false,
         "current": {
-          "text": "cex-monitor-uat",
-          "value": "cex-monitor-uat"
+          "text": "dex-monitor-staging",
+          "value": "dex-monitor-staging"
         },
         "definition": "label_values(runtime_cpu_load_1{native_env=\"$native_env\"},app)",
         "label": "应用名",
@@ -474,8 +480,8 @@
       },
       {
         "current": {
-          "text": "cex-monitor-uat-b9c9c68d7-lkc2h",
-          "value": "cex-monitor-uat-b9c9c68d7-lkc2h"
+          "text": "All",
+          "value": "$__all"
         },
         "definition": "label_values(runtime_cpu_load_1{app=\"$app\", native_env=\"$native_env\"},pod_name)",
         "includeAll": true,
@@ -495,12 +501,12 @@
     ]
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "服务运行监控",
   "uid": "bibz25p",
-  "version": 121
+  "version": 142
 }

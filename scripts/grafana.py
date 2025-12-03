@@ -108,7 +108,7 @@ class Grafana:
 
         # ("GRPC", "HTTP", "Redis", "MySQL", "Runtime")
         for rowName, metrics in config.items():
-            if rowName != "HTTP":
+            if rowName != "GRPC":
                 continue
             self.adjust_pannel_num()
             row = self.build_row(rowName, metrics)

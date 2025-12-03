@@ -31,7 +31,7 @@
       },
       "id": 3,
       "panels": [],
-      "title": "Redis",
+      "title": "Runtime",
       "type": "row"
     },
     {
@@ -39,207 +39,7 @@
         "type": "prometheus",
         "uid": "af3yvzwa6ckcgc"
       },
-      "description": "每秒从池中成功获取空闲连接的次数",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "showValues": false,
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": 0
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "cps"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 12,
-        "x": 0,
-        "y": 1
-      },
-      "id": 4,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "12.2.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "af3yvzwa6ckcgc"
-          },
-          "editorMode": "code",
-          "expr": "rate(redis_hits{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[5m])",
-          "legendFormat": "{{pod_name}}-{{name}}",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "redis_hits",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "af3yvzwa6ckcgc"
-      },
-      "description": "每秒未能从池中获取连接，需要新建连接的次数",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "showValues": false,
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": 0
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "cps"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 12,
-        "x": 12,
-        "y": 1
-      },
-      "id": 6,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "12.2.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "af3yvzwa6ckcgc"
-          },
-          "editorMode": "code",
-          "expr": "rate(redis_misses{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[5m])",
-          "legendFormat": "{{pod_name}}-{{name}}",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "redis_misses",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "af3yvzwa6ckcgc"
-      },
-      "description": "池中总连接数（活跃 + 空闲）",
+      "description": "1min 内的 CPU 的 running 队列上平均 task 数量",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -300,9 +100,9 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 8
+        "y": 1
       },
-      "id": 9,
+      "id": 1,
       "options": {
         "legend": {
           "calcs": [],
@@ -324,13 +124,13 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "redis_total_conns{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}",
-          "legendFormat": "{{pod_name}}-{{name}}",
+          "expr": "runtime_cpu_load_1{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}",
+          "legendFormat": "{{pod_name}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "redis_total_conns",
+      "title": "runtime_cpu_load_1",
       "type": "timeseries"
     },
     {
@@ -338,7 +138,7 @@
         "type": "prometheus",
         "uid": "af3yvzwa6ckcgc"
       },
-      "description": "当前空闲连接数",
+      "description": "5min 内的 CPU 的 running 队列上平均 task 数量",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -399,7 +199,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 8
+        "y": 1
       },
       "id": 5,
       "options": {
@@ -423,13 +223,13 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "redis_idle_conns{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}",
-          "legendFormat": "{{pod_name}}-{{name}}",
+          "expr": "runtime_cpu_load_5{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}",
+          "legendFormat": "{{pod_name}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "redis_idle_conns",
+      "title": "runtime_cpu_load_5",
       "type": "timeseries"
     },
     {
@@ -437,7 +237,7 @@
         "type": "prometheus",
         "uid": "af3yvzwa6ckcgc"
       },
-      "description": "每秒等待连接超时的次数",
+      "description": "15min 内的 CPU 的 running 队列上平均 task 数量",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -490,8 +290,7 @@
                 "value": 80
               }
             ]
-          },
-          "unit": "cps"
+          }
         },
         "overrides": []
       },
@@ -499,9 +298,9 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 15
+        "y": 8
       },
-      "id": 8,
+      "id": 4,
       "options": {
         "legend": {
           "calcs": [],
@@ -523,13 +322,13 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "rate(redis_timeouts{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[5m])",
-          "legendFormat": "{{pod_name}}-{{name}}",
+          "expr": "runtime_cpu_load_15{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}",
+          "legendFormat": "{{pod_name}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "redis_timeouts",
+      "title": "runtime_cpu_load_15",
       "type": "timeseries"
     },
     {
@@ -537,7 +336,106 @@
         "type": "prometheus",
         "uid": "af3yvzwa6ckcgc"
       },
-      "description": "每秒被移除的过期连接数",
+      "description": "机器逻辑核心数(硬件)",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 8
+      },
+      "id": 6,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.2.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "af3yvzwa6ckcgc"
+          },
+          "editorMode": "code",
+          "expr": "runtime_cpu_total{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}",
+          "legendFormat": "{{pod_name}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "runtime_cpu_total",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "af3yvzwa6ckcgc"
+      },
+      "description": "CPU 使用率",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -591,14 +489,14 @@
               }
             ]
           },
-          "unit": "cps"
+          "unit": "percent"
         },
         "overrides": []
       },
       "gridPos": {
         "h": 7,
         "w": 12,
-        "x": 12,
+        "x": 0,
         "y": 15
       },
       "id": 7,
@@ -623,13 +521,13 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "rate(redis_stale_conns{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[5m])",
-          "legendFormat": "{{pod_name}}-{{name}}",
+          "expr": "runtime_cpu_usage_percent{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}",
+          "legendFormat": "{{pod_name}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "redis_stale_conns",
+      "title": "runtime_cpu_usage_percent",
       "type": "timeseries"
     },
     {
@@ -637,7 +535,7 @@
         "type": "prometheus",
         "uid": "af3yvzwa6ckcgc"
       },
-      "description": "命令执行时延(μs)",
+      "description": "最近 5min 每秒钟 GC 发生次数",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -691,17 +589,17 @@
               }
             ]
           },
-          "unit": "µs"
+          "unit": "cps"
         },
         "overrides": []
       },
       "gridPos": {
         "h": 7,
         "w": 12,
-        "x": 0,
-        "y": 22
+        "x": 12,
+        "y": 15
       },
-      "id": 11,
+      "id": 8,
       "options": {
         "legend": {
           "calcs": [],
@@ -723,13 +621,13 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "rate(redis_command_latency_sum{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[5m]) / rate(redis_command_latency_count{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[5m])",
-          "legendFormat": "{{pod_name}}-{{name}}-{{command}}",
+          "expr": "rate(runtime_gc_num{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[5m])",
+          "legendFormat": "{{pod_name}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "redis_command_latency",
+      "title": "runtime_gc_num",
       "type": "timeseries"
     },
     {
@@ -737,7 +635,7 @@
         "type": "prometheus",
         "uid": "af3yvzwa6ckcgc"
       },
-      "description": "ping 服务器延时",
+      "description": "每次 GC 暂停时间(μs)",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -791,7 +689,105 @@
               }
             ]
           },
-          "unit": "µs"
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 22
+      },
+      "id": 9,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.2.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "af3yvzwa6ckcgc"
+          },
+          "editorMode": "code",
+          "expr": "rate(runtime_gc_pause_total{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[5m]) / rate(runtime_gc_num{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[5m]) / 1000",
+          "legendFormat": "{{pod_name}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "每次 GC 暂停时间(μs)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "af3yvzwa6ckcgc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
         },
         "overrides": []
       },
@@ -823,13 +819,13 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "rate(redis_check_latency_sum{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[5m]) / rate(redis_check_latency_count{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[5m])",
-          "legendFormat": "{{pod_name}}-{{name}}",
+          "expr": "runtime_goroutine_num{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}",
+          "legendFormat": "{{pod_name}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "redis_check_latency",
+      "title": "runtime_goroutine_num",
       "type": "timeseries"
     },
     {
@@ -837,7 +833,7 @@
         "type": "prometheus",
         "uid": "af3yvzwa6ckcgc"
       },
-      "description": "每秒命令请求次数",
+      "description": "当前活跃分配的堆内存字节数",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -891,7 +887,7 @@
               }
             ]
           },
-          "unit": "cps"
+          "unit": "decbytes"
         },
         "overrides": []
       },
@@ -901,7 +897,7 @@
         "x": 0,
         "y": 29
       },
-      "id": 1,
+      "id": 11,
       "options": {
         "legend": {
           "calcs": [],
@@ -923,13 +919,513 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "rate(redis_command{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[5m])",
-          "legendFormat": "{{pod_name}}-{{name}}-{{command}}",
+          "expr": "runtime_mem_alloc{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}",
+          "legendFormat": "{{pod_name}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "redis_command",
+      "title": "runtime_mem_alloc",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "af3yvzwa6ckcgc"
+      },
+      "description": "实时堆内存使用量",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 29
+      },
+      "id": 12,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.2.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "af3yvzwa6ckcgc"
+          },
+          "editorMode": "code",
+          "expr": "runtime_mem_heap_alloc{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}",
+          "legendFormat": "{{pod_name}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "runtime_mem_heap_alloc",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "af3yvzwa6ckcgc"
+      },
+      "description": "当前堆上存活的对象数量",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "K"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 36
+      },
+      "id": 13,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.2.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "af3yvzwa6ckcgc"
+          },
+          "editorMode": "code",
+          "expr": "runtime_mem_heap_object_num{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}/1000",
+          "legendFormat": "{{pod_name}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "runtime_mem_heap_object_num",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "af3yvzwa6ckcgc"
+      },
+      "description": "Go 运行时系统内存占用",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 36
+      },
+      "id": 14,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.2.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "af3yvzwa6ckcgc"
+          },
+          "editorMode": "code",
+          "expr": "runtime_mem_system_alloc{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}",
+          "legendFormat": "{{pod_name}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "runtime_mem_system_alloc",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "af3yvzwa6ckcgc"
+      },
+      "description": "硬件内存数量",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 43
+      },
+      "id": 15,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.2.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "af3yvzwa6ckcgc"
+          },
+          "editorMode": "code",
+          "expr": "runtime_mem_total{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}",
+          "legendFormat": "{{pod_name}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "runtime_mem_total",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "af3yvzwa6ckcgc"
+      },
+      "description": "内存使用率",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 43
+      },
+      "id": 16,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.2.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "af3yvzwa6ckcgc"
+          },
+          "editorMode": "code",
+          "expr": "runtime_mem_usage_percent{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}",
+          "legendFormat": "{{pod_name}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "runtime_mem_usage_percent",
       "type": "timeseries"
     }
   ],
@@ -941,8 +1437,8 @@
       {
         "allowCustomValue": false,
         "current": {
-          "text": "uat",
-          "value": "uat"
+          "text": "staging",
+          "value": "staging"
         },
         "definition": "label_values(runtime_cpu_load_1,native_env)",
         "label": "环境",
@@ -960,11 +1456,11 @@
       {
         "allowCustomValue": false,
         "current": {
-          "text": "native-api-gateway-uat",
-          "value": "native-api-gateway-uat"
+          "text": "orderbook-manager-staging",
+          "value": "orderbook-manager-staging"
         },
         "definition": "label_values(runtime_cpu_load_1{native_env=\"$native_env\"},app)",
-        "label": "应用名",
+        "label": "指标名",
         "name": "app",
         "options": [],
         "query": {
@@ -978,8 +1474,8 @@
       },
       {
         "current": {
-          "text": "native-api-gateway-uat-789d45f97c-8g88n",
-          "value": "native-api-gateway-uat-789d45f97c-8g88n"
+          "text": "All",
+          "value": "$__all"
         },
         "definition": "label_values(runtime_cpu_load_1{app=\"$app\"},pod_name)",
         "includeAll": true,
@@ -999,12 +1495,12 @@
     ]
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "服务运行监控",
   "uid": "bibz25p",
-  "version": 116
+  "version": 91
 }

@@ -1,0 +1,41 @@
+Counter grpc_client_request
+Counter grpc_server_request
+Counter http_request
+Counter redis_command
+
+Gauge mysql_idle
+Gauge mysql_in_use
+Gauge mysql_max_idle_closed
+Gauge mysql_max_idle_time_closed
+Gauge mysql_max_lifetime_closed
+Gauge mysql_max_open_connections
+Gauge mysql_open_connections
+Gauge mysql_wait_count
+Gauge redis_hits
+Gauge redis_idle_conns
+Gauge redis_misses
+Gauge redis_stale_conns
+Gauge redis_timeouts
+Gauge redis_total_conns
+
+Gauge runtime_cpu_load_1
+Gauge runtime_cpu_load_15
+Gauge runtime_cpu_load_5
+Gauge runtime_cpu_total
+Gauge runtime_cpu_usage_percent
+Gauge runtime_gc_num
+Gauge runtime_gc_pause_total
+Gauge runtime_goroutine_num
+Gauge runtime_mem_alloc
+Gauge runtime_mem_heap_alloc
+Gauge runtime_mem_heap_object_num
+Gauge runtime_mem_system_alloc
+Gauge runtime_mem_total
+Gauge runtime_mem_usage_percent
+
+Timer grpc_client_latency
+Timer grpc_server_latency
+Timer http_latency
+Timer mysql_wait_duration
+Timer redis_check_latency
+Timer redis_command_latency

@@ -29,8 +29,8 @@
       {
         "allowCustomValue": false,
         "current": {
-          "text": "staging",
-          "value": "staging"
+          "text": "uat",
+          "value": "uat"
         },
         "definition": "label_values(runtime_cpu_load_1,native_env)",
         "label": "环境",
@@ -48,8 +48,8 @@
       {
         "allowCustomValue": false,
         "current": {
-          "text": "cex-monitor-spot-staging",
-          "value": "cex-monitor-spot-staging"
+          "text": "cex-monitor-uat",
+          "value": "cex-monitor-uat"
         },
         "definition": "label_values(runtime_cpu_load_1{native_env=\"$native_env\"},app)",
         "label": "应用名",
@@ -66,17 +66,17 @@
       },
       {
         "current": {
-          "text": "All",
-          "value": "$__all"
+          "text": "cex-monitor-uat-b9c9c68d7-lkc2h",
+          "value": "cex-monitor-uat-b9c9c68d7-lkc2h"
         },
-        "definition": "label_values(runtime_cpu_load_1{app=\"$app\"},pod_name)",
+        "definition": "label_values(runtime_cpu_load_1{app=\"$app\", native_env=\"$native_env\"},pod_name)",
         "includeAll": true,
         "label": "实例名",
         "name": "pod_name",
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(runtime_cpu_load_1{app=\"$app\"},pod_name)",
+          "query": "label_values(runtime_cpu_load_1{app=\"$app\", native_env=\"$native_env\"},pod_name)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
@@ -87,12 +87,12 @@
     ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "服务运行监控",
   "uid": "bibz25p",
-  "version": 34
+  "version": 121
 }

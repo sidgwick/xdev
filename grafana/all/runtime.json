@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 0,
+  "id": 12,
   "links": [],
   "panels": [
     {
@@ -124,7 +124,7 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "runtime_cpu_load_1{native_env=~\"$native_env\", app=~\"$app\"}",
+          "expr": "runtime_cpu_load_1{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}",
           "legendFormat": "{{pod_name}}",
           "range": true,
           "refId": "A"
@@ -223,7 +223,7 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "runtime_cpu_load_5{native_env=~\"$native_env\", app=~\"$app\"}",
+          "expr": "runtime_cpu_load_5{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}",
           "legendFormat": "{{pod_name}}",
           "range": true,
           "refId": "A"
@@ -322,7 +322,7 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "runtime_cpu_load_15{native_env=~\"$native_env\", app=~\"$app\"}",
+          "expr": "runtime_cpu_load_15{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}",
           "legendFormat": "{{pod_name}}",
           "range": true,
           "refId": "A"
@@ -421,7 +421,7 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "runtime_cpu_total{native_env=~\"$native_env\", app=~\"$app\"}",
+          "expr": "runtime_cpu_total{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}",
           "legendFormat": "{{pod_name}}",
           "range": true,
           "refId": "A"
@@ -521,7 +521,7 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "runtime_cpu_usage_percent{native_env=~\"$native_env\", app=~\"$app\"}",
+          "expr": "runtime_cpu_usage_percent{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}",
           "legendFormat": "{{pod_name}}",
           "range": true,
           "refId": "A"
@@ -621,7 +621,7 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "rate(runtime_gc_num{native_env=~\"$native_env\", app=~\"$app\"}[5m])",
+          "expr": "rate(runtime_gc_num{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[5m])",
           "legendFormat": "{{pod_name}}",
           "range": true,
           "refId": "A"
@@ -721,7 +721,7 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "rate(runtime_gc_pause_total{native_env=~\"$native_env\", app=~\"$app\"}[5m]) / rate(runtime_gc_num{native_env=~\"$native_env\", app=~\"$app\"}[5m]) / 1000",
+          "expr": "rate(runtime_gc_pause_total{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[5m]) / rate(runtime_gc_num{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[5m]) / 1000",
           "legendFormat": "{{pod_name}}",
           "range": true,
           "refId": "A"
@@ -819,7 +819,7 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "runtime_goroutine_num{native_env=~\"$native_env\", app=~\"$app\"}",
+          "expr": "runtime_goroutine_num{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}",
           "legendFormat": "{{pod_name}}",
           "range": true,
           "refId": "A"
@@ -919,7 +919,7 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "runtime_mem_alloc{native_env=~\"$native_env\", app=~\"$app\"}",
+          "expr": "runtime_mem_alloc{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}",
           "legendFormat": "{{pod_name}}",
           "range": true,
           "refId": "A"
@@ -1019,7 +1019,7 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "runtime_mem_heap_alloc{native_env=~\"$native_env\", app=~\"$app\"}",
+          "expr": "runtime_mem_heap_alloc{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}",
           "legendFormat": "{{pod_name}}",
           "range": true,
           "refId": "A"
@@ -1119,7 +1119,7 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "runtime_mem_heap_object_num{native_env=~\"$native_env\", app=~\"$app\"}/1000",
+          "expr": "runtime_mem_heap_object_num{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}/1000",
           "legendFormat": "{{pod_name}}",
           "range": true,
           "refId": "A"
@@ -1219,7 +1219,7 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "runtime_mem_system_alloc{native_env=~\"$native_env\", app=~\"$app\"}",
+          "expr": "runtime_mem_system_alloc{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}",
           "legendFormat": "{{pod_name}}",
           "range": true,
           "refId": "A"
@@ -1319,7 +1319,7 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "runtime_mem_total{native_env=~\"$native_env\", app=~\"$app\"}",
+          "expr": "runtime_mem_total{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}",
           "legendFormat": "{{pod_name}}",
           "range": true,
           "refId": "A"
@@ -1419,7 +1419,7 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "runtime_mem_usage_percent{native_env=~\"$native_env\", app=~\"$app\"}",
+          "expr": "runtime_mem_usage_percent{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}",
           "legendFormat": "{{pod_name}}",
           "range": true,
           "refId": "A"
@@ -1502,5 +1502,5 @@
   "timezone": "browser",
   "title": "服务运行监控",
   "uid": "bibz25p",
-  "version": 70
+  "version": 91
 }

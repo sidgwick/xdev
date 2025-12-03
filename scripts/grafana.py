@@ -85,9 +85,9 @@ class Grafana:
         panel = self.get_template()
         panel["title"] = metric
 
-        expr = """runtime_cpu_load_1{native_env=~"$native_env", app=~"$app"}"""
+        expr = """runtime_cpu_load_1{native_env=~"$native_env", app=~"$app", pod_name=~"$pod_name"}"""
         if typ == "Timer":
-            expr = """rate(runtime_cpu_load_1_sum{native_env=~"$native_env", app=~"$app"}[1m]) / rate(mysql_wait_duration_count{native_env=~"$native_env", app=~"$app"}[1m])"""
+            expr = """rate(runtime_cpu_load_1_sum{native_env=~"$native_env", app=~"$app", pod_name=~"$pod_name"}[1m]) / rate(mysql_wait_duration_count{native_env=~"$native_env", app=~"$app", pod_name=~"$pod_name"}[1m])"""
 
         expr = expr.replace("runtime_cpu_load_1", metric)
         panel["targets"][0]["expr"] = expr

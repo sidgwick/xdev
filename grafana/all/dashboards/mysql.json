@@ -520,7 +520,7 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": " rate(mysql_wait_count{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[5m])",
+          "expr": " rate(mysql_wait_count{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[1m])",
           "legendFormat": "{{pod_name}} - {{name}}",
           "range": true,
           "refId": "A"
@@ -619,7 +619,7 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "rate(mysql_wait_duration_sum{native_env=~\"$native_env\", app=~\"$app\"}[5m]) / rate(mysql_wait_duration_count{native_env=~\"$native_env\", app=~\"$app\"}[5m])",
+          "expr": "rate(mysql_wait_duration_sum{native_env=~\"$native_env\", app=~\"$app\"}[1m]) / rate(mysql_wait_duration_count{native_env=~\"$native_env\", app=~\"$app\"}[1m])",
           "legendFormat": "{{pod_name}} - {{name}}",
           "range": true,
           "refId": "A"

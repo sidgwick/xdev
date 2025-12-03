@@ -125,7 +125,7 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "rate(redis_hits{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[5m])",
+          "expr": "rate(redis_hits{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[1m])",
           "legendFormat": "{{pod_name}}-{{name}}",
           "range": true,
           "refId": "A"
@@ -225,7 +225,7 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "rate(redis_misses{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[5m])",
+          "expr": "rate(redis_misses{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[1m])",
           "legendFormat": "{{pod_name}}-{{name}}",
           "range": true,
           "refId": "A"
@@ -523,7 +523,7 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "rate(redis_timeouts{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[5m])",
+          "expr": "rate(redis_timeouts{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[1m])",
           "legendFormat": "{{pod_name}}-{{name}}",
           "range": true,
           "refId": "A"
@@ -623,7 +623,7 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "rate(redis_stale_conns{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[5m])",
+          "expr": "rate(redis_stale_conns{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[1m])",
           "legendFormat": "{{pod_name}}-{{name}}",
           "range": true,
           "refId": "A"
@@ -723,7 +723,7 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "rate(redis_command_latency_sum{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[5m]) / rate(redis_command_latency_count{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[5m])",
+          "expr": "rate(redis_command_latency_sum{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[1m]) / rate(redis_command_latency_count{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[1m])",
           "legendFormat": "{{pod_name}}-{{name}}-{{command}}",
           "range": true,
           "refId": "A"
@@ -823,7 +823,7 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "rate(redis_check_latency_sum{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[5m]) / rate(redis_check_latency_count{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[5m])",
+          "expr": "rate(redis_check_latency_sum{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[1m]) / rate(redis_check_latency_count{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[1m])",
           "legendFormat": "{{pod_name}}-{{name}}",
           "range": true,
           "refId": "A"
@@ -923,7 +923,7 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "rate(redis_command{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[5m])",
+          "expr": "rate(redis_command{native_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[1m])",
           "legendFormat": "{{pod_name}}-{{name}}-{{command}}",
           "range": true,
           "refId": "A"

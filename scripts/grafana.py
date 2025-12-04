@@ -155,11 +155,11 @@ def merge_pannels(file):
 template = json.load(open("grafana/template/panel.json"))
 
 config = parseMetrics(open("grafana/template/metric.txt"))
-# dashboards = merge_pannels(sys.argv[2])
+dashboards = merge_pannels("grafana/template/merge.json")
 
 g = Grafana(template)
-result = g.build(config)
 
-# result = g.merge_dashboard(dashboards)
+# result = g.build(config)
+result = g.merge_dashboard(dashboards)
 
 print(json.dumps(result))

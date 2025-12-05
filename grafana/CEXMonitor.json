@@ -31,7 +31,7 @@
       },
       "id": 10,
       "panels": [],
-      "title": "CEXMonitor",
+      "title": "CEXMonitor - OrderBook",
       "type": "row"
     },
     {
@@ -78,6 +78,7 @@
               "mode": "off"
             }
           },
+          "decimals": 2,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -124,7 +125,7 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "rd_infra_orderbook_monitor{line=\"bn_ask1_price\",symbol=~\"$symbol\",exchange=~\"$exchange\"}",
+          "expr": "rd_infra_orderbook_monitor{local_source=\"bn\", symbol=~\"$symbol\", line=\"price\", level=\"1\", side=\"ask\", exchange_type=~\"$exchange_type\"}",
           "legendFormat": "Binance",
           "range": true,
           "refId": "A"
@@ -135,7 +136,7 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": " rd_infra_orderbook_monitor{line=\"cex_ask1_price\",symbol=~\"$symbol\",exchange=~\"$exchange\"}",
+          "expr": "rd_infra_orderbook_monitor{local_source=\"cex_monitor\", symbol=~\"$symbol\", line=\"price\", level=\"1\", side=\"ask\", exchange_type=~\"$exchange_type\"}",
           "hide": false,
           "instant": false,
           "legendFormat": "CEXMonitor",
@@ -143,7 +144,7 @@
           "refId": "B"
         }
       ],
-      "title": "$symbol($exchange) - ask1 - price",
+      "title": "$symbol($exchange_type) - ask1 - price",
       "type": "timeseries"
     },
     {
@@ -158,10 +159,12 @@
           },
           "custom": {
             "axisBorderShow": true,
-            "axisCenteredZero": true,
+            "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
+            "axisSoftMax": 1,
+            "axisSoftMin": -1,
             "barAlignment": 0,
             "barWidthFactor": 0.6,
             "drawStyle": "line",
@@ -204,7 +207,7 @@
               }
             ]
           },
-          "unit": "percent"
+          "unit": "percentunit"
         },
         "overrides": []
       },
@@ -230,7 +233,6 @@
         }
       },
       "pluginVersion": "12.2.1",
-      "repeatDirection": "h",
       "targets": [
         {
           "datasource": {
@@ -238,14 +240,14 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "(rd_infra_orderbook_monitor{line=\"bn_ask1_price\",symbol=~\"$symbol\",exchange=~\"$exchange\"} - on() rd_infra_orderbook_monitor{line=\"cex_ask1_price\",symbol=~\"$symbol\",exchange=~\"$exchange\"}) / on() rd_infra_orderbook_monitor{line=\"cex_ask1_price\",symbol=~\"$symbol\",exchange=~\"$exchange\"} * 100",
+          "expr": "(\n  sum by(local_source, symbol, line, level, side, exchange_type) (\n    rd_infra_orderbook_monitor{local_source=\"bn\", symbol=~\"$symbol\", line=\"price\", level=\"1\", side=\"ask\", exchange_type=\"$exchange_type\"}\n  )\n  - on(symbol, line, level, side, exchange_type)\n  sum by(local_source, symbol, line, level, side, exchange_type) (\n    rd_infra_orderbook_monitor{local_source=\"cex_monitor\", symbol=~\"$symbol\", line=\"price\", level=\"1\", side=\"ask\", exchange_type=\"$exchange_type\"}\n  )\n) / on(symbol, line, level, side, exchange_type)\n  sum by(local_source, symbol, line, level, side, exchange_type) (\n    rd_infra_orderbook_monitor{local_source=\"cex_monitor\", symbol=~\"$symbol\", line=\"price\", level=\"1\", side=\"ask\", exchange_type=\"$exchange_type\"}\n  )",
           "hide": false,
           "legendFormat": "Ask1 - Price",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "$symbol($exchange) - ask1 - PriceDiff(%)",
+      "title": "$symbol($exchange_type) - ask1 - PriceDiff(%)",
       "type": "timeseries"
     },
     {
@@ -330,7 +332,6 @@
         }
       },
       "pluginVersion": "12.2.1",
-      "repeatDirection": "h",
       "targets": [
         {
           "datasource": {
@@ -338,7 +339,7 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "rd_infra_orderbook_monitor{line=\"bn_ask1_qty\",symbol=~\"$symbol\",exchange=~\"$exchange\"}",
+          "expr": "rd_infra_orderbook_monitor{local_source=\"bn\", symbol=~\"$symbol\", line=\"qty\", level=\"1\", side=\"ask\", exchange_type=~\"$exchange_type\"}",
           "hide": false,
           "instant": false,
           "legendFormat": "Binance",
@@ -351,7 +352,7 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "rd_infra_orderbook_monitor{line=\"cex_ask1_qty\",symbol=~\"$symbol\",exchange=~\"$exchange\"}",
+          "expr": "rd_infra_orderbook_monitor{local_source=\"cex_monitor\", symbol=~\"$symbol\", line=\"qty\", level=\"1\", side=\"ask\", exchange_type=~\"$exchange_type\"}",
           "hide": false,
           "instant": false,
           "legendFormat": "CEXMonitor",
@@ -359,7 +360,7 @@
           "refId": "D"
         }
       ],
-      "title": "$symbol($exchange) - ask1 - quantity",
+      "title": "$symbol($exchange_type) - ask1 - quantity",
       "type": "timeseries"
     },
     {
@@ -445,7 +446,6 @@
         }
       },
       "pluginVersion": "12.2.1",
-      "repeatDirection": "v",
       "targets": [
         {
           "datasource": {
@@ -453,15 +453,15 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "rd_infra_orderbook_monitor{line=\"bn_ask1_qty\",symbol=~\"$symbol\",exchange=~\"$exchange\"} - on() rd_infra_orderbook_monitor{line=\"cex_ask1_qty\",symbol=~\"$symbol\",exchange=~\"$exchange\"}",
+          "expr": "(\n  sum by(local_source, symbol, line, level, side, exchange_type) (\n    rd_infra_orderbook_monitor{local_source=\"bn\", symbol=~\"$symbol\", line=\"qty\", level=\"1\", side=\"ask\", exchange_type=\"$exchange_type\"}\n  )\n  - on(symbol, line, level, side, exchange_type)\n  sum by(local_source, symbol, line, level, side, exchange_type) (\n    rd_infra_orderbook_monitor{local_source=\"cex_monitor\", symbol=~\"$symbol\", line=\"qty\", level=\"1\", side=\"ask\", exchange_type=\"$exchange_type\"}\n  )\n)",
           "hide": false,
           "instant": false,
-          "legendFormat": "Ask1 - Quantity",
+          "legendFormat": "Ask1-Quantity",
           "range": true,
           "refId": "B"
         }
       ],
-      "title": "$symbol($exchange) - ask1 - QuantityDiff",
+      "title": "$symbol($exchange_type) - ask1 - QuantityDiff",
       "type": "timeseries"
     },
     {
@@ -508,6 +508,7 @@
               "mode": "off"
             }
           },
+          "decimals": 2,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -546,7 +547,6 @@
         }
       },
       "pluginVersion": "12.2.1",
-      "repeatDirection": "h",
       "targets": [
         {
           "datasource": {
@@ -554,7 +554,7 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "rd_infra_orderbook_monitor{line=\"bn_bid1_price\",symbol=~\"$symbol\",exchange=~\"$exchange\"}",
+          "expr": "rd_infra_orderbook_monitor{local_source=\"bn\", symbol=~\"$symbol\", line=\"price\", level=\"1\", side=\"bid\", exchange_type=~\"$exchange_type\"}",
           "hide": false,
           "legendFormat": "Binance",
           "range": true,
@@ -566,7 +566,7 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": " rd_infra_orderbook_monitor{line=\"cex_bid1_price\",symbol=~\"$symbol\",exchange=~\"$exchange\"}",
+          "expr": " rd_infra_orderbook_monitor{local_source=\"cex_monitor\", symbol=~\"$symbol\", line=\"price\", level=\"1\", side=\"bid\", exchange_type=~\"$exchange_type\"}",
           "hide": false,
           "instant": false,
           "legendFormat": "CEXMonitor",
@@ -574,7 +574,7 @@
           "refId": "G"
         }
       ],
-      "title": "$symbol($exchange) - bid1 - price",
+      "title": "$symbol($exchange_type) - bid1 - price",
       "type": "timeseries"
     },
     {
@@ -589,10 +589,12 @@
           },
           "custom": {
             "axisBorderShow": true,
-            "axisCenteredZero": true,
+            "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
+            "axisSoftMax": 1,
+            "axisSoftMin": -1,
             "barAlignment": 0,
             "barWidthFactor": 0.6,
             "drawStyle": "line",
@@ -635,7 +637,7 @@
               }
             ]
           },
-          "unit": "percent"
+          "unit": "percentunit"
         },
         "overrides": []
       },
@@ -660,7 +662,6 @@
         }
       },
       "pluginVersion": "12.2.1",
-      "repeatDirection": "v",
       "targets": [
         {
           "datasource": {
@@ -668,14 +669,14 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "(rd_infra_orderbook_monitor{line=\"bn_bid1_price\",symbol=~\"$symbol\",exchange=~\"$exchange\"} - on() rd_infra_orderbook_monitor{line=\"cex_bid1_price\",symbol=~\"$symbol\",exchange=~\"$exchange\"}) / on() rd_infra_orderbook_monitor{line=\"cex_bid1_price\",symbol=~\"$symbol\",exchange=~\"$exchange\"} * 100",
+          "expr": "(\n  sum by(local_source, symbol, line, level, side, exchange_type) (\n    rd_infra_orderbook_monitor{local_source=\"bn\", symbol=~\"$symbol\", line=\"price\", level=\"1\", side=\"bid\", exchange_type=\"$exchange_type\"}\n  )\n  - on(symbol, line, level, side, exchange_type)\n  sum by(local_source, symbol, line, level, side, exchange_type) (\n    rd_infra_orderbook_monitor{local_source=\"cex_monitor\", symbol=~\"$symbol\", line=\"price\", level=\"1\", side=\"bid\", exchange_type=\"$exchange_type\"}\n  )\n) / on(symbol, line, level, side, exchange_type)\n  sum by(local_source, symbol, line, level, side, exchange_type) (\n    rd_infra_orderbook_monitor{local_source=\"cex_monitor\", symbol=~\"$symbol\", line=\"price\", level=\"1\", side=\"bid\", exchange_type=\"$exchange_type\"}\n  )",
           "hide": false,
           "legendFormat": "Bid1 - price",
           "range": true,
           "refId": "C"
         }
       ],
-      "title": "$symbol($exchange) - bid1 - PriceDiff(%)",
+      "title": "$symbol($exchange_type) - bid1 - PriceDiff(%)",
       "type": "timeseries"
     },
     {
@@ -760,7 +761,6 @@
         }
       },
       "pluginVersion": "12.2.1",
-      "repeatDirection": "h",
       "targets": [
         {
           "datasource": {
@@ -768,7 +768,7 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "rd_infra_orderbook_monitor{line=\"bn_bid1_qty\",symbol=~\"$symbol\",exchange=~\"$exchange\"}",
+          "expr": "rd_infra_orderbook_monitor{local_source=\"bn\", symbol=~\"$symbol\", line=\"qty\", level=\"1\", side=\"bid\", exchange_type=~\"$exchange_type\"}",
           "hide": false,
           "instant": false,
           "legendFormat": "Binance",
@@ -781,7 +781,7 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "rd_infra_orderbook_monitor{line=\"cex_bid1_qty\",symbol=~\"$symbol\",exchange=~\"$exchange\"}",
+          "expr": "rd_infra_orderbook_monitor{local_source=\"cex_monitor\", symbol=~\"$symbol\", line=\"qty\", level=\"1\", side=\"bid\", exchange_type=~\"$exchange_type\"}",
           "hide": false,
           "instant": false,
           "legendFormat": "CEXMonitor",
@@ -789,7 +789,7 @@
           "refId": "H"
         }
       ],
-      "title": "$symbol($exchange) - bid1 - quantity",
+      "title": "$symbol($exchange_type) - bid1 - quantity",
       "type": "timeseries"
     },
     {
@@ -875,7 +875,6 @@
         }
       },
       "pluginVersion": "12.2.1",
-      "repeatDirection": "v",
       "targets": [
         {
           "datasource": {
@@ -883,7 +882,7 @@
             "uid": "af3yvzwa6ckcgc"
           },
           "editorMode": "code",
-          "expr": "rd_infra_orderbook_monitor{line=\"bn_bid1_qty\",symbol=~\"$symbol\",exchange=~\"$exchange\"} - on() rd_infra_orderbook_monitor{line=\"cex_bid1_qty\",symbol=~\"$symbol\",exchange=~\"$exchange\"}",
+          "expr": "(\n  sum by(local_source, symbol, line, level, side, exchange_type) (\n    rd_infra_orderbook_monitor{local_source=\"bn\", symbol=~\"$symbol\", line=\"qty\", level=\"1\", side=\"bid\", exchange_type=\"$exchange_type\"}\n  )\n  - on(symbol, line, level, side, exchange_type)\n  sum by(local_source, symbol, line, level, side, exchange_type) (\n    rd_infra_orderbook_monitor{local_source=\"cex_monitor\", symbol=~\"$symbol\", line=\"qty\", level=\"1\", side=\"bid\", exchange_type=\"$exchange_type\"}\n  )\n)",
           "hide": false,
           "instant": false,
           "legendFormat": "Bid-1 - Quantity",
@@ -891,31 +890,492 @@
           "refId": "D"
         }
       ],
-      "title": "$symbol($exchange) - bid1 - QuantityDiff",
+      "title": "$symbol($exchange_type) - bid1 - QuantityDiff",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 29
+      },
+      "id": 11,
+      "panels": [],
+      "title": "CexMonitor - KLine",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "af3yvzwa6ckcgc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 2,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 30
+      },
+      "id": 12,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.2.1",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "rd_infra_kline_monitor{local_source=\"cex_monitor\", symbol=~\"$symbol\", level=\"1\", tick=\"1m\", line=\"close\", exchange_type=~\"$exchange_type\"}",
+          "legendFormat": "CexMonitor-1m",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "af3yvzwa6ckcgc"
+          },
+          "editorMode": "code",
+          "expr": "rd_infra_kline_monitor{local_source=\"bn\", symbol=~\"$symbol\", level=\"1\", tick=\"1m\", line=\"close\", exchange_type=~\"$exchange_type\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Binance-1m",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "$symbol($exchange_type) - 一分钟 K 线收盘价",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "af3yvzwa6ckcgc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMax": 1,
+            "axisSoftMin": -1,
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 30
+      },
+      "id": 14,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.2.1",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "(\n  sum by(local_source, symbol, line, level, side, exchange_type) (\n    rd_infra_kline_monitor{local_source=\"bn\", symbol=~\"$symbol\", line=\"close\", level=\"1\", tick=\"1m\", exchange_type=\"$exchange_type\"}\n  )\n  - on(symbol, line, level, side, exchange_type)\n  sum by(local_source, symbol, line, level, side, exchange_type) (\n    rd_infra_kline_monitor{local_source=\"cex_monitor\", symbol=~\"$symbol\", line=\"close\", level=\"1\", tick=\"1m\", exchange_type=~\"$exchange_type\"}\n  )\n) / on(symbol, line, level, side, exchange_type)\n  sum by(local_source, symbol, line, level, side, exchange_type) (\n    rd_infra_kline_monitor{local_source=\"cex_monitor\", symbol=~\"$symbol\", line=\"close\", level=\"1\", tick=\"1m\", exchange_type=~\"$exchange_type\"}\n  )\n\n",
+          "legendFormat": "1m",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "$symbol($exchange_type) - 一分钟 K 线收盘价Diff(%)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "af3yvzwa6ckcgc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 2,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 38
+      },
+      "id": 13,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.2.1",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "rd_infra_kline_monitor{local_source=\"cex_monitor\", symbol=~\"$symbol\", level=\"1\", tick=\"1h\", line=\"close\", exchange_type=~\"$exchange_type\"}",
+          "legendFormat": "CexMonitor-1h",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "af3yvzwa6ckcgc"
+          },
+          "editorMode": "code",
+          "expr": "rd_infra_kline_monitor{local_source=\"bn\", symbol=~\"$symbol\", level=\"1\", tick=\"1h\", line=\"close\", exchange_type=~\"$exchange_type\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Binance-1h",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "$symbol($exchange_type) - 一小时 K 线收盘价",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "af3yvzwa6ckcgc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMax": 1,
+            "axisSoftMin": -1,
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 38
+      },
+      "id": 15,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.2.1",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "(\n  sum by(local_source, symbol, line, level, side, exchange_type) (\n    rd_infra_kline_monitor{local_source=\"bn\", symbol=~\"$symbol\", line=\"close\", level=\"1\", tick=\"1h\", exchange_type=\"$exchange_type\"}\n  )\n  - on(symbol, line, level, side, exchange_type)\n  sum by(local_source, symbol, line, level, side, exchange_type) (\n    rd_infra_kline_monitor{local_source=\"cex_monitor\", symbol=~\"$symbol\", line=\"close\", level=\"1\", tick=\"1h\", exchange_type=~\"$exchange_type\"}\n  )\n) / on(symbol, line, level, side, exchange_type)\n  sum by(local_source, symbol, line, level, side, exchange_type) (\n    rd_infra_kline_monitor{local_source=\"cex_monitor\", symbol=~\"$symbol\", line=\"close\", level=\"1\", tick=\"1h\", exchange_type=~\"$exchange_type\"}\n  )\n\n",
+          "legendFormat": "1h",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "$symbol($exchange_type) - 一小时 K 线收盘价Diff(%)",
       "type": "timeseries"
     }
   ],
   "preload": false,
+  "refresh": "10s",
   "schemaVersion": 42,
   "tags": [],
   "templating": {
     "list": [
       {
         "current": {
+          "text": "tky",
+          "value": "tky"
+        },
+        "definition": "label_values(rd_infra_orderbook_monitor,native_region)",
+        "description": "",
+        "label": "区域",
+        "name": "native_region",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(rd_infra_orderbook_monitor,native_region)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
+      },
+      {
+        "current": {
+          "text": "uat_v2",
+          "value": "uat_v2"
+        },
+        "definition": "label_values(rd_infra_orderbook_monitor{native_region=\"$native_region\"},native_env)",
+        "description": "",
+        "name": "native_env",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(rd_infra_orderbook_monitor{native_region=\"$native_region\"},native_env)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
+      },
+      {
+        "current": {
           "text": "ETH/USDT",
           "value": "ETH/USDT"
         },
-        "definition": "label_values(rd_infra_orderbook_monitor, symbol)",
+        "definition": "label_values(rd_infra_orderbook_monitor{native_region=\"$native_region\", native_env=\"$native_env\"},symbol)",
         "includeAll": false,
         "label": "交易对",
         "name": "symbol",
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(rd_infra_orderbook_monitor, symbol)",
+          "query": "label_values(rd_infra_orderbook_monitor{native_region=\"$native_region\", native_env=\"$native_env\"},symbol)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
-        "refresh": 1,
+        "refresh": 2,
         "regex": "",
         "sort": 1,
         "type": "query"
@@ -923,20 +1383,20 @@
       {
         "allowCustomValue": false,
         "current": {
-          "text": "future",
-          "value": "future"
+          "text": "spot",
+          "value": "spot"
         },
-        "definition": "label_values(rd_infra_orderbook_monitor{symbol=~\"$symbol\"},exchange)",
+        "definition": "label_values(rd_infra_orderbook_monitor{symbol=\"$symbol\", native_region=\"$native_region\", native_env=\"$native_env\"},exchange_type)",
         "includeAll": false,
         "label": "期货/现货",
-        "name": "exchange",
+        "name": "exchange_type",
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(rd_infra_orderbook_monitor{symbol=~\"$symbol\"},exchange)",
+          "query": "label_values(rd_infra_orderbook_monitor{symbol=\"$symbol\", native_region=\"$native_region\", native_env=\"$native_env\"},exchange_type)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
-        "refresh": 1,
+        "refresh": 2,
         "regex": "",
         "sort": 1,
         "type": "query"
@@ -951,5 +1411,5 @@
   "timezone": "browser",
   "title": "OrderBook 监控",
   "uid": "bi4dhjzx",
-  "version": 15
+  "version": 82
 }

@@ -122,7 +122,7 @@
                 "uid": "af3yvzwa6ckcgc"
               },
               "editorMode": "code",
-              "expr": "sum (rate(http_request{to_region=\"$native_region\", to_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[1m]))",
+              "expr": "sum (rate(http_request{to_region=\"$native_region\", to_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\",uri=~\"$uri\"}[1m]))",
               "legendFormat": "QPS",
               "range": true,
               "refId": "A"
@@ -222,7 +222,7 @@
                 "uid": "af3yvzwa6ckcgc"
               },
               "editorMode": "code",
-              "expr": "sum(rate(http_latency_sum{to_region=\"$native_region\", to_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[1m])) / sum(rate(http_latency_count{to_region=\"$native_region\", to_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[1m]))",
+              "expr": "sum(rate(http_latency_sum{to_region=\"$native_region\", to_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\",uri=~\"$uri\"}[1m])) / sum(rate(http_latency_count{to_region=\"$native_region\", to_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\",uri=~\"$uri\"}[1m]))",
               "legendFormat": "平均延时",
               "range": true,
               "refId": "A"
@@ -322,7 +322,7 @@
                 "uid": "af3yvzwa6ckcgc"
               },
               "editorMode": "code",
-              "expr": "(sum (rate(http_request{to_region=\"$native_region\", to_env=~\"$native_env\", app=~\"$app\",is_error=\"1\",pod_name=~\"$pod_name\"}[1m]))) / (sum (rate(http_request{to_region=\"$native_region\", to_env=~\"$native_env\", app=~\"$app\",pod_name=~\"$pod_name\"}[1m])))",
+              "expr": "(sum (rate(http_request{to_region=\"$native_region\", to_env=~\"$native_env\", app=~\"$app\",is_error=\"1\",pod_name=~\"$pod_name\",uri=~\"$uri\"}[1m]))) / (sum (rate(http_request{to_region=\"$native_region\", to_env=~\"$native_env\", app=~\"$app\",pod_name=~\"$pod_name\",uri=~\"$uri\"}[1m])))",
               "legendFormat": "Error Rate",
               "range": true,
               "refId": "A"
@@ -443,7 +443,7 @@
                 "uid": "af3yvzwa6ckcgc"
               },
               "editorMode": "code",
-              "expr": "sum by (uri) (rate(http_request{to_region=\"$native_region\", to_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[1m]))",
+              "expr": "sum by (uri) (rate(http_request{to_region=\"$native_region\", to_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\",uri=~\"$uri\"}[1m]))",
               "legendFormat": "__auto",
               "range": true,
               "refId": "A"
@@ -548,7 +548,7 @@
                 "uid": "af3yvzwa6ckcgc"
               },
               "editorMode": "code",
-              "expr": "sum by(uri) (rate(http_latency_sum{to_region=\"$native_region\", to_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[1m])) / sum by(uri) (rate(http_latency_count{to_region=\"$native_region\", to_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[1m]))",
+              "expr": "sum by(uri) (rate(http_latency_sum{to_region=\"$native_region\", to_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\",uri=~\"$uri\"}[1m])) / sum by(uri) (rate(http_latency_count{to_region=\"$native_region\", to_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\",uri=~\"$uri\"}[1m]))",
               "legendFormat": "__auto",
               "range": true,
               "refId": "A"
@@ -653,7 +653,7 @@
                 "uid": "af3yvzwa6ckcgc"
               },
               "editorMode": "code",
-              "expr": "(sum by (uri) (rate(http_request{to_region=\"$native_region\", to_env=~\"$native_env\", app=~\"$app\",is_error=\"1\",pod_name=~\"$pod_name\"}[1m]))) / (sum by (uri) (rate(http_request{to_region=\"$native_region\", to_env=~\"$native_env\", app=~\"$app\",pod_name=~\"$pod_name\"}[1m])))",
+              "expr": "(sum by (uri) (rate(http_request{to_region=\"$native_region\", to_env=~\"$native_env\", app=~\"$app\",is_error=\"1\",pod_name=~\"$pod_name\",uri=~\"$uri\"}[1m]))) / (sum by (uri) (rate(http_request{to_region=\"$native_region\", to_env=~\"$native_env\", app=~\"$app\",pod_name=~\"$pod_name\",uri=~\"$uri\"}[1m])))",
               "legendFormat": "{{uri}}",
               "range": true,
               "refId": "A"
@@ -758,7 +758,7 @@
                 "uid": "af3yvzwa6ckcgc"
               },
               "editorMode": "code",
-              "expr": "sum by (uri) (rate(http_request{to_region=\"$native_region\", to_env=~\"$native_env\", app=~\"$app\",is_error=\"1\", pod_name=~\"$pod_name\"}[1m]))",
+              "expr": "sum by (uri) (rate(http_request{to_region=\"$native_region\", to_env=~\"$native_env\", app=~\"$app\",is_error=\"1\", pod_name=~\"$pod_name\",uri=~\"$uri\"}[1m]))",
               "legendFormat": "{{uri}}",
               "range": true,
               "refId": "A"
@@ -865,7 +865,7 @@
                 "uid": "af3yvzwa6ckcgc"
               },
               "editorMode": "code",
-              "expr": "sum by (err_code) (rate(http_request{to_region=\"$native_region\", to_env=~\"$native_env\", app=~\"$app\",is_error=\"1\", pod_name=~\"$pod_name\"}[1m]))",
+              "expr": "sum by (err_code) (rate(http_request{to_region=\"$native_region\", to_env=~\"$native_env\", app=~\"$app\",is_error=\"1\", pod_name=~\"$pod_name\",uri=~\"$uri\"}[1m]))",
               "legendFormat": "{{err_code}}",
               "range": true,
               "refId": "A"
@@ -970,7 +970,7 @@
                 "uid": "af3yvzwa6ckcgc"
               },
               "editorMode": "code",
-              "expr": "sum by (uri, err_code) (rate(http_request{to_region=\"$native_region\", to_env=~\"$native_env\", app=~\"$app\",is_error=\"1\", pod_name=~\"$pod_name\"}[1m]))",
+              "expr": "sum by (uri, err_code) (rate(http_request{to_region=\"$native_region\", to_env=~\"$native_env\", app=~\"$app\",is_error=\"1\", pod_name=~\"$pod_name\",uri=~\"$uri\"}[1m]))",
               "legendFormat": "{{uri}}-{{err_code}}",
               "range": true,
               "refId": "A"
@@ -1089,7 +1089,7 @@
                 "uid": "af3yvzwa6ckcgc"
               },
               "editorMode": "code",
-              "expr": "sum by (pod_name) (rate(http_request{to_region=\"$native_region\", to_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[1m]))",
+              "expr": "sum by (pod_name) (rate(http_request{to_region=\"$native_region\", to_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\",uri=~\"$uri\"}[1m]))",
               "legendFormat": "__auto",
               "range": true,
               "refId": "A"
@@ -1194,7 +1194,7 @@
                 "uid": "af3yvzwa6ckcgc"
               },
               "editorMode": "code",
-              "expr": "sum by(pod_name) (rate(http_latency_sum{to_region=\"$native_region\", to_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[1m])) / sum by(pod_name) (rate(http_latency_count{to_region=\"$native_region\", to_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"}[1m]))",
+              "expr": "sum by(pod_name) (rate(http_latency_sum{to_region=\"$native_region\", to_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\",uri=~\"$uri\"}[1m])) / sum by(pod_name) (rate(http_latency_count{to_region=\"$native_region\", to_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\",uri=~\"$uri\"}[1m]))",
               "legendFormat": "__auto",
               "range": true,
               "refId": "A"
@@ -1299,7 +1299,7 @@
                 "uid": "af3yvzwa6ckcgc"
               },
               "editorMode": "code",
-              "expr": "(sum by (pod_name) (rate(http_request{to_region=\"$native_region\", to_env=~\"$native_env\", app=~\"$app\",is_error=\"1\",pod_name=~\"$pod_name\"}[1m]))) / (sum by (pod_name) (rate(http_request{to_region=\"$native_region\", to_env=~\"$native_env\", app=~\"$app\",pod_name=~\"$pod_name\"}[1m])))",
+              "expr": "(sum by (pod_name) (rate(http_request{to_region=\"$native_region\", to_env=~\"$native_env\", app=~\"$app\",is_error=\"1\",pod_name=~\"$pod_name\",uri=~\"$uri\"}[1m]))) / (sum by (pod_name) (rate(http_request{to_region=\"$native_region\", to_env=~\"$native_env\", app=~\"$app\",pod_name=~\"$pod_name\",uri=~\"$uri\"}[1m])))",
               "legendFormat": "{{uri}}",
               "range": true,
               "refId": "A"
@@ -1404,7 +1404,7 @@
                 "uid": "af3yvzwa6ckcgc"
               },
               "editorMode": "code",
-              "expr": "sum by (pod_name) (rate(http_request{to_region=\"$native_region\", to_env=~\"$native_env\", app=~\"$app\",is_error=\"1\", pod_name=~\"$pod_name\"}[1m]))",
+              "expr": "sum by (pod_name) (rate(http_request{to_region=\"$native_region\", to_env=~\"$native_env\", app=~\"$app\",is_error=\"1\", pod_name=~\"$pod_name\",uri=~\"$uri\"}[1m]))",
               "legendFormat": "__auto",
               "range": true,
               "refId": "A"
@@ -1509,7 +1509,7 @@
                 "uid": "af3yvzwa6ckcgc"
               },
               "editorMode": "code",
-              "expr": "sum by (pod_name, err_code) (rate(http_request{to_region=\"$native_region\", to_env=~\"$native_env\", app=~\"$app\",is_error=\"1\", pod_name=~\"$pod_name\"}[1m]))",
+              "expr": "sum by (pod_name, err_code) (rate(http_request{to_region=\"$native_region\", to_env=~\"$native_env\", app=~\"$app\",is_error=\"1\", pod_name=~\"$pod_name\",uri=~\"$uri\"}[1m]))",
               "legendFormat": "{{pod_name}}-{{err_code}}",
               "range": true,
               "refId": "A"

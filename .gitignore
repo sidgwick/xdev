@@ -2,3 +2,4 @@ tmp
 all.sql
 example.csv
 grafana/template/merge.json
+*.log

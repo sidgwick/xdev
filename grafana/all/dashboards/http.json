@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 0,
+  "id": 22,
   "links": [],
   "panels": [
     {
@@ -412,7 +412,7 @@
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 128
+            "y": 2
           },
           "id": 51,
           "options": {
@@ -519,7 +519,7 @@
             "h": 6,
             "w": 24,
             "x": 0,
-            "y": 135
+            "y": 9
           },
           "id": 52,
           "options": {
@@ -624,7 +624,7 @@
             "h": 6,
             "w": 24,
             "x": 0,
-            "y": 141
+            "y": 15
           },
           "id": 53,
           "options": {
@@ -729,7 +729,7 @@
             "h": 6,
             "w": 24,
             "x": 0,
-            "y": 147
+            "y": 21
           },
           "id": 54,
           "options": {
@@ -834,7 +834,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 153
+            "y": 27
           },
           "id": 60,
           "options": {
@@ -941,7 +941,7 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 161
+            "y": 35
           },
           "id": 61,
           "options": {
@@ -1535,13 +1535,13 @@
           "text": "tky",
           "value": "tky"
         },
-        "definition": "label_values(runtime_cpu_load_1,native_region)",
+        "definition": "label_values(http_request,to_region)",
         "label": "地区",
         "name": "native_region",
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(runtime_cpu_load_1,native_region)",
+          "query": "label_values(http_request,to_region)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 2,
@@ -1555,13 +1555,13 @@
           "text": "prod",
           "value": "prod"
         },
-        "definition": "label_values(runtime_cpu_load_1{native_region=~\"$native_region\"},native_env)",
+        "definition": "label_values(http_request{to_region=~\"$native_region\"},to_env)",
         "label": "环境",
         "name": "native_env",
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(runtime_cpu_load_1{native_region=~\"$native_region\"},native_env)",
+          "query": "label_values(http_request{to_region=~\"$native_region\"},to_env)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 2,
@@ -1590,22 +1590,43 @@
       },
       {
         "current": {
-          "text": "native-api-gateway-prod-v2-75548b7b9f-25kf2",
-          "value": "native-api-gateway-prod-v2-75548b7b9f-25kf2"
+          "text": "All",
+          "value": "$__all"
         },
-        "definition": "label_values(runtime_cpu_load_1{native_region=~\"$native_region\", native_env=~\"$native_env\", app=~\"$app\"},pod_name)",
+        "definition": "label_values(http_request{to_region=~\"$native_region\", to_env=~\"$native_env\", app=~\"$app\"},pod_name)",
         "includeAll": true,
         "label": "实例名",
         "name": "pod_name",
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(runtime_cpu_load_1{native_region=~\"$native_region\", native_env=~\"$native_env\", app=~\"$app\"},pod_name)",
+          "query": "label_values(http_request{to_region=~\"$native_region\", to_env=~\"$native_env\", app=~\"$app\"},pod_name)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 2,
         "regex": "",
         "sort": 5,
+        "type": "query"
+      },
+      {
+        "allowCustomValue": false,
+        "current": {
+          "text": "/v1/available-borrow",
+          "value": "/v1/available-borrow"
+        },
+        "definition": "label_values(http_request{to_region=~\"$native_region\", to_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"},uri)",
+        "includeAll": true,
+        "label": "接口",
+        "name": "uri",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(http_request{to_region=~\"$native_region\", to_env=~\"$native_env\", app=~\"$app\", pod_name=~\"$pod_name\"},uri)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "sort": 1,
         "type": "query"
       }
     ]
@@ -1618,5 +1639,5 @@
   "timezone": "browser",
   "title": "HTTP 运行监控",
   "uid": "8AB4F546-8055-4E16-877E-853E80C78FF8",
-  "version": 64
+  "version": 81
 }

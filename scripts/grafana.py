@@ -117,23 +117,27 @@ class Grafana:
         return result
 
     def merge_dashboard(self, dashboards):
+        def merge_panels(pannels):
+            result = []
+            for panel in pannels:
+                # // dash["panels"] = merge_panels(dash["panels"])
+                if panel.get("type") == "row":
+                    self.adjust_pannel_num()
+
+                    self.rows += 1
+                    panel["gridPos"] = self.get_pos(isRow=True)
+                    panel["panels"] = merge_panels(panel.get("panels", []))
+                    result.append(panel)
+                else:
+                    self.pannels += 1
+                    panel["gridPos"] = self.get_pos(isRow=False)
+                    result.append(panel)
+            return result
+
         result = []
         for dash in dashboards:
-            self.adjust_pannel_num()
-
-            pannels = dash.get("panels", [])
-            if len(pannels) <= 0:
-                continue
-
-            self.rows += 1
-            row = pannels[0]
-            row["gridPos"] = self.get_pos(isRow=True)
-            result.append(row)
-
-            for pan in pannels[1:]:
-                self.pannels += 1
-                pan["gridPos"] = self.get_pos(isRow=False)
-                result.append(pan)
+            dash["panels"] = merge_panels(dash["panels"])
+            result.append(dash)
 
         return result
 
@@ -145,6 +149,8 @@ def merge_pannels(file):
         line = line.strip("\n")
         if len(line) <= 0:
             continue
+        if line[0] == "#":
+            continue
 
         dash = json.loads(line)
         dashboards.append(dash)
@@ -155,7 +161,7 @@ def merge_pannels(file):
 template = json.load(open("grafana/template/panel.json"))
 
 config = parseMetrics(open("grafana/template/metric.txt"))
-dashboards = merge_pannels("grafana/template/merge.json")
+dashboards = merge_pannels("grafana/template/merge.txt")
 
 g = Grafana(template)
 

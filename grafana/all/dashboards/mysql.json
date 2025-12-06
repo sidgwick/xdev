@@ -295,7 +295,7 @@
             "h": 7,
             "w": 12,
             "x": 0,
-            "y": 43
+            "y": 64
           },
           "id": 21,
           "options": {
@@ -394,7 +394,7 @@
             "h": 7,
             "w": 12,
             "x": 12,
-            "y": 43
+            "y": 64
           },
           "id": 22,
           "options": {
@@ -493,7 +493,7 @@
             "h": 7,
             "w": 12,
             "x": 0,
-            "y": 50
+            "y": 71
           },
           "id": 10,
           "options": {
@@ -592,7 +592,7 @@
             "h": 7,
             "w": 12,
             "x": 12,
-            "y": 50
+            "y": 71
           },
           "id": 24,
           "options": {
@@ -691,7 +691,7 @@
             "h": 7,
             "w": 12,
             "x": 0,
-            "y": 57
+            "y": 78
           },
           "id": 23,
           "options": {
@@ -791,7 +791,7 @@
             "h": 7,
             "w": 12,
             "x": 12,
-            "y": 57
+            "y": 78
           },
           "id": 7,
           "options": {
@@ -1792,13 +1792,13 @@
           "text": "tky",
           "value": "tky"
         },
-        "definition": "label_values(runtime_cpu_load_1,native_region)",
+        "definition": "label_values(mysql_max_open_connections,native_region)",
         "label": "地区",
         "name": "native_region",
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(runtime_cpu_load_1,native_region)",
+          "query": "label_values(mysql_max_open_connections,native_region)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 2,
@@ -1809,16 +1809,16 @@
       {
         "allowCustomValue": false,
         "current": {
-          "text": "prod",
-          "value": "prod"
+          "text": "uat",
+          "value": "uat"
         },
-        "definition": "label_values(runtime_cpu_load_1{native_region=~\"$native_region\"},native_env)",
+        "definition": "label_values(mysql_max_open_connections{native_region=~\"$native_region\"},native_env)",
         "label": "环境",
         "name": "native_env",
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(runtime_cpu_load_1{native_region=~\"$native_region\"},native_env)",
+          "query": "label_values(mysql_max_open_connections{native_region=~\"$native_region\"},native_env)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 2,
@@ -1829,16 +1829,16 @@
       {
         "allowCustomValue": false,
         "current": {
-          "text": "native-api-gateway-prod-v2",
-          "value": "native-api-gateway-prod-v2"
+          "text": "hedge-rw-db-uat",
+          "value": "hedge-rw-db-uat"
         },
-        "definition": "label_values(runtime_cpu_load_1{native_env=~\"$native_env\", native_region=~\"$native_region\"},app)",
+        "definition": "label_values(mysql_max_open_connections{native_env=~\"$native_env\", native_region=~\"$native_region\"},app)",
         "label": "应用名",
         "name": "app",
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(runtime_cpu_load_1{native_env=~\"$native_env\", native_region=~\"$native_region\"},app)",
+          "query": "label_values(mysql_max_open_connections{native_env=~\"$native_env\", native_region=~\"$native_region\"},app)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 2,
@@ -1850,14 +1850,14 @@
           "text": "All",
           "value": "$__all"
         },
-        "definition": "label_values(runtime_cpu_load_1{native_region=~\"$native_region\", native_env=~\"$native_env\", app=~\"$app\"},pod_name)",
+        "definition": "label_values(mysql_max_open_connections{native_region=~\"$native_region\", native_env=~\"$native_env\", app=~\"$app\"},pod_name)",
         "includeAll": true,
         "label": "实例名",
         "name": "pod_name",
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(runtime_cpu_load_1{native_region=~\"$native_region\", native_env=~\"$native_env\", app=~\"$app\"},pod_name)",
+          "query": "label_values(mysql_max_open_connections{native_region=~\"$native_region\", native_env=~\"$native_env\", app=~\"$app\"},pod_name)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 2,
@@ -1868,12 +1868,12 @@
     ]
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-30m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "MySQL 运行监控",
   "uid": "18BB0B20-3B32-41F4-A8AF-5DC8A31BD2C4",
-  "version": 23
+  "version": 30
 }

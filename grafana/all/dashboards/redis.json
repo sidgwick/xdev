@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 24,
+  "id": 0,
   "links": [],
   "panels": [
     {
@@ -297,7 +297,7 @@
             "h": 7,
             "w": 12,
             "x": 0,
-            "y": 77
+            "y": 215
           },
           "id": 28,
           "options": {
@@ -396,7 +396,7 @@
             "h": 7,
             "w": 12,
             "x": 12,
-            "y": 77
+            "y": 215
           },
           "id": 29,
           "options": {
@@ -496,7 +496,7 @@
             "h": 7,
             "w": 12,
             "x": 0,
-            "y": 84
+            "y": 222
           },
           "id": 30,
           "options": {
@@ -596,7 +596,7 @@
             "h": 7,
             "w": 12,
             "x": 12,
-            "y": 84
+            "y": 222
           },
           "id": 31,
           "options": {
@@ -696,7 +696,7 @@
             "h": 7,
             "w": 12,
             "x": 0,
-            "y": 91
+            "y": 229
           },
           "id": 32,
           "options": {
@@ -796,7 +796,7 @@
             "h": 7,
             "w": 12,
             "x": 12,
-            "y": 91
+            "y": 229
           },
           "id": 33,
           "options": {
@@ -896,7 +896,7 @@
             "h": 7,
             "w": 12,
             "x": 0,
-            "y": 98
+            "y": 236
           },
           "id": 34,
           "options": {
@@ -1928,13 +1928,13 @@
           "text": "tky",
           "value": "tky"
         },
-        "definition": "label_values(runtime_cpu_load_1,native_region)",
+        "definition": "label_values(redis_hits,native_region)",
         "label": "地区",
         "name": "native_region",
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(runtime_cpu_load_1,native_region)",
+          "query": "label_values(redis_hits,native_region)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 2,
@@ -1945,16 +1945,16 @@
       {
         "allowCustomValue": false,
         "current": {
-          "text": "prod",
-          "value": "prod"
+          "text": "uat",
+          "value": "uat"
         },
-        "definition": "label_values(runtime_cpu_load_1{native_region=~\"$native_region\"},native_env)",
+        "definition": "label_values(redis_hits{native_region=~\"$native_region\"},native_env)",
         "label": "环境",
         "name": "native_env",
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(runtime_cpu_load_1{native_region=~\"$native_region\"},native_env)",
+          "query": "label_values(redis_hits{native_region=~\"$native_region\"},native_env)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 2,
@@ -1965,16 +1965,16 @@
       {
         "allowCustomValue": false,
         "current": {
-          "text": "native-api-gateway-prod-v2",
-          "value": "native-api-gateway-prod-v2"
+          "text": "hedge-rw-db-uat",
+          "value": "hedge-rw-db-uat"
         },
-        "definition": "label_values(runtime_cpu_load_1{native_env=~\"$native_env\", native_region=~\"$native_region\"},app)",
+        "definition": "label_values(redis_hits{native_env=~\"$native_env\", native_region=~\"$native_region\"},app)",
         "label": "应用名",
         "name": "app",
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(runtime_cpu_load_1{native_env=~\"$native_env\", native_region=~\"$native_region\"},app)",
+          "query": "label_values(redis_hits{native_env=~\"$native_env\", native_region=~\"$native_region\"},app)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 2,
@@ -1986,14 +1986,14 @@
           "text": "All",
           "value": "$__all"
         },
-        "definition": "label_values(runtime_cpu_load_1{native_region=~\"$native_region\", native_env=~\"$native_env\", app=~\"$app\"},pod_name)",
+        "definition": "label_values(redis_hits{native_region=~\"$native_region\", native_env=~\"$native_env\", app=~\"$app\"},pod_name)",
         "includeAll": true,
         "label": "实例名",
         "name": "pod_name",
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(runtime_cpu_load_1{native_region=~\"$native_region\", native_env=~\"$native_env\", app=~\"$app\"},pod_name)",
+          "query": "label_values(redis_hits{native_region=~\"$native_region\", native_env=~\"$native_env\", app=~\"$app\"},pod_name)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 2,
@@ -2004,12 +2004,12 @@
     ]
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-30m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "Redis 运行监控",
   "uid": "DCBB137A-D43B-4036-B80D-FC3398FDB508",
-  "version": 20
+  "version": 24
 }
